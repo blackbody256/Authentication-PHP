@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 14, 2025 at 11:20 AM
+-- Generation Time: Mar 14, 2025 at 12:38 PM
 -- Server version: 10.11.9-MariaDB-0+deb12u1
 -- PHP Version: 8.2.26
 
@@ -29,13 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `profile_picture` varchar(50) NOT NULL,
-  `created_at` date NOT NULL
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
--- Error reading data for table user_management.users: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `user_management`.`users`&#039; at line 1
 
 --
 -- Indexes for dumped tables
@@ -46,7 +45,7 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_username` (`username`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
