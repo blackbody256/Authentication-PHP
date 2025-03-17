@@ -7,7 +7,7 @@
     
 }
 body{
-    background-image: url(./sunset.jpg);
+    background-image: url(../Images/sunset.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;

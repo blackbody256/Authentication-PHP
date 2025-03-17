@@ -13,7 +13,7 @@
         }
         
         body {
-            background: url('./forest.jpg') no-repeat center center/cover;
+            background: url('../Images/forest.jpg') no-repeat center center/cover;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -156,6 +156,7 @@
         <label class="logo">Project</label>
         <ul>
             <li><a href="profile.php">Update Profile</a></li>
+    <!--this is used to head to the profile page -->
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
