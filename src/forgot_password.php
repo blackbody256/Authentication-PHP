@@ -131,7 +131,7 @@ if (isset($_POST['reset_request'])) {
             <label for="email">Email:</label>
             <input type="email" name="email" required placeholder="Enter your email">
             <button type="submit" name="reset_request">Reset Password</button>
-            <button type="button" onclick="window.location.href='login.php'">Back to Login</button>
+            <button type="button" onclick="window.location.href='logIn.php'">Back to Login</button>
         </form>
         <?php
         if (isset($message)) {

@@ -149,7 +149,7 @@ if (isset($_SESSION['error'])) {
 <nav class="navbar">
         <h1>Project</h1>
         <div>
-            <a href="#" class="signup-btn">Sign Up</a>
+            <a href="Register.php" class="signup-btn">Sign Up</a>
         </div>
     </nav>
 
@@ -176,12 +176,12 @@ if (isset($_SESSION['error'])) {
                 <label>
                     <input type="checkbox" name="remember"> Remember Me
                 </label>
-                <a href="#">Forgot Password?</a>
+                <a href="forgot_password.php">Forgot Password?</a>
             </div>
 
             <button type="submit">Login</button>
 
-            <p>Don't have an account? <a href="#">Register</a></p>
+            <p>Don't have an account? <a href="Register.php">Register</a></p>
         </form>
     </div>
 </body>

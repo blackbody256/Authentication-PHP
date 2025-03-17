@@ -12,7 +12,7 @@ header("Pragma: no-cache");
 header("Expires: 0");
 
 // Redirect to login page
-header("Location: login.php");
+header("Location: logIn.php");
 exit();
 ?>
 

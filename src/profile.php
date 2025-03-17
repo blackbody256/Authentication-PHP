@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../Config/Connect.php';
+$_SESSION["ID"] = 1;
 
 
 // Ensure the user is logged in
@@ -162,7 +163,7 @@ $stmt->close();
             <!-- Save and Cancel Buttons -->
             <div style="display: flex; gap: 10px; margin-top: 20px;">
                 <button type="submit" class="save-btn">Save Changes</button>
-                <button type="button" class="cancel-btn" onclick="window.location.href='profile.php'">Cancel</button>
+                <button type="button" class="cancel-btn" onclick="window.location.href='dashboard.php'">Cancel</button>
             </div>
 
         </form>

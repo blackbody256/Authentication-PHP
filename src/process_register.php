@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "User registered successfully!";
+        header("Location: logIn.php");
     } else {
         echo "Error: " . $con->error;
     }
