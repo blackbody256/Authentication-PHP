@@ -1,5 +1,5 @@
 <?php
-require_once('./Config/Connect.php');
+require_once('../Config/Connect.php');
 
 // Check if the token is provided in the URL
 if (isset($_GET['token'])) {
