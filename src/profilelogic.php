@@ -1,6 +1,6 @@
 <?php
 session_start();
-include __DIR__ . '/../Config/Connect.php';
+include '../Config/Connect.php';
 
 
 //Only logged in users can proceed
@@ -21,7 +21,7 @@ if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
 
 // Check if a new profile image is uploaded
 if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
-    $target_dir = "./uploads/";
+    $target_dir = "../Images/";
     $file_name = basename($_FILES["profile_picture"]["name"]);
     $target_file = $target_dir . $file_name;
     $file_size = $_FILES["profile_picture"]["size"];

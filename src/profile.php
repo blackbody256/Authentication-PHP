@@ -1,6 +1,6 @@
 <?php
 session_start();
-include __DIR__ . '/../Config/Connect.php';
+include '../Config/Connect.php';
 
 
 // Ensure the user is logged in
@@ -138,7 +138,7 @@ $stmt->close();
         
     <div class="container">
         <!-- Image -->
-        <img src="<?php echo $profileImage ? 'uploads/' . $profileImage : ' '; ?>" alt="Profile Image" class="profile-image">
+        <img src="<?php echo $profileImage ? '../Images/' . $profileImage : ' '; ?>" alt="Profile Image" class="profile-image">
         
         <div class="profile-info">
             
