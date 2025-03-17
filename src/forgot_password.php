@@ -1,8 +1,8 @@
 <?php
-require_once('C:\Cloned\Authentication-PHP\Config\Connect.php');
-require 'C:\Cloned\Authentication-PHP\PHPMailer\src\Exception.php';
-require 'C:\Cloned\Authentication-PHP\PHPMailer\src\PHPMailer.php';
-require 'C:\Cloned\Authentication-PHP\PHPMailer\src\SMTP.php';
+require_once('./Config/Connect.php');
+require './PHPMailer/src/Exception.php';
+require './PHPMailer/src/PHPMailer.php';
+require './PHPMailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
