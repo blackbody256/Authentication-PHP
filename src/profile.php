@@ -144,6 +144,7 @@ $stmt->close();
                 <button type="submit" class="save-btn">Save Changes</button>
                 <button type="button" class="cancel-btn" onclick="window.location.href='dashboard.php'">Cancel</button>
             </div>
+            <a href="delete.php">Delete Account</a>
 
         </form>
     </div>
