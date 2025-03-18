@@ -25,7 +25,6 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     <style>
-        /* General styles */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -50,7 +49,6 @@ $stmt->close();
             text-align: center;
         }
 
-        /* Profile image */
         .profile-image {
             width: 100px;
             height: 100px;
@@ -59,21 +57,6 @@ $stmt->close();
             border: 3px solid #ddd;
         }
 
-        .profile-info {
-            margin-top: 10px;
-        }
-
-        .change-photo {
-            background: black;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Form styles */
         .form-group {
             text-align: left;
             margin: 15px 0;
@@ -136,17 +119,11 @@ $stmt->close();
         
     <div class="container">
         <!-- Image -->
-        <img src="<?php echo $profileImage ? '../Images/' . $profileImage : ' '; ?>" alt="Profile Image" class="profile-image">
-        
-        <div class="profile-info">
-            
-            <button class="change-photo" onclick="document.getElementById('image').click()">Change Photo</button>
-        </div>
+        <img src="<?php echo $profileImage ? '../Images/' . $profileImage : ' '; ?>" alt="Profile Image" class="profile-image">  
+        <h3>Edit Profile:</h3>  
 
         <!-- Edit Form -->
         <form action="profilelogic.php" method="post" enctype="multipart/form-data">
-            <input type="file" id="image" name="profile_picture" accept="image/*" style="display: none;">
-            
             <div class="form-group">
                 <label for="UserName">Name</label>
                 <input type="text" id="UserName" name="UserName"value="<?php echo htmlspecialchars($userName); ?>" required>
@@ -157,6 +134,11 @@ $stmt->close();
                 <input type="email" id="Email" name="Email"value="<?php echo htmlspecialchars($email); ?>" required>
             </div>
 
+            <div class="form-group">
+                <label for="image">Change profile picture</label>
+                <input type="file" id="image" name="profile_picture" accept="image/*">
+            </div>
+            
             <!-- Save and Cancel Buttons -->
             <div style="display: flex; gap: 10px; margin-top: 20px;">
                 <button type="submit" class="save-btn">Save Changes</button>

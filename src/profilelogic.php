@@ -19,6 +19,24 @@ if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
     $emailErr = "Invalid email format";
 }
 
+// Fetch and delete old image
+if (!empty($_FILES["profile_picture"]["name"])) {
+    $sql = "SELECT profile_picture FROM users WHERE ID = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $stmt->bind_result($oldImage);
+    $stmt->fetch();
+    $stmt->close();
+
+    if (!empty($oldImage)) {
+        $oldImagePath = "../Images/" . $oldImage;
+        if (file_exists($oldImagePath)) {
+            unlink($oldImagePath); // Delete old image
+        }
+    }
+}
+
 // Check if a new profile image is uploaded
 if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 0) {
     $target_dir = "../Images/";
