@@ -1,6 +1,6 @@
 <?php
+session_start();
 include '../Config/Connect.php';
-
 // Ensure the user is logged in
 if (!isset($_SESSION["ID"])) {
     header("Location: Register.php"); // Redirect to register page if not logged in

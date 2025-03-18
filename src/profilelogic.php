@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../Config/Connect.php';
 
 
@@ -44,7 +45,7 @@ if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 
     $stmt->bind_param("sssi", $_POST["UserName"], $_POST["Email"], $file_name, $userID);
 
     if ($stmt->execute()) {
-        echo "Profile updated successfully!";
+        header("Location: dashboard.php");
     } else {
         echo "Error updating profile: " . $con->error;
     }
@@ -56,7 +57,7 @@ if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 
     $stmt->bind_param("ssi", $UserName, $Email, $userID);
 
     if ($stmt->execute()) {
-        echo "Profile updated successfully!";
+        header("Location: dashboard.php");
     } else {
         echo "Error updating profile: " . $con->error;
     }

@@ -184,7 +184,7 @@ if (isset($_SESSION['error'])) {
                 <label>
                     <input type="checkbox" name="remember" <?php echo isset($_COOKIE['remember_email']) ? 'checked' : ''; ?>> Remember Me
                 </label>
-                <a href="#">Forgot Password?</a>
+                <a href="forgot_password.php">Forgot Password?</a>
             </div>
 
             <button type="submit">Login</button>
