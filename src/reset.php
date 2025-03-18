@@ -102,9 +102,11 @@ if (isset($_GET['token'])) {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo "<div class='form-container'><div class='message'>Password reset successfully. <a href='login.php'>Login</a></div></div> ";
+        header("Location: reset_success.php");
+        exit();
+
     } else {
-        echo "<div class='form-container'><div class='error'>Password reset failed.</div></div>";
+        echo "<div class='form-container'><div class='error'>Password reset failed. <a href='login.php'>Login</a> </div></div>";
     }
 } else {
     echo "Invalid request.";
