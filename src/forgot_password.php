@@ -68,7 +68,7 @@ if (isset($_POST['reset_request'])) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: url('../Images/forest.jpg') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -111,7 +111,7 @@ if (isset($_POST['reset_request'])) {
             cursor: pointer;
         }
         .form-container button:hover {
-            background-color: black;
+            background-color: grey;
         }
         .message {
             margin-top: 15px;

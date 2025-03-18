@@ -37,7 +37,7 @@ $stmt->close();
         }
 
         body {
-            background-color: #f9f9f9;
+            background: url('../Images/forest.jpg') no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;

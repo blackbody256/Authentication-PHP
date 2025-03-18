@@ -21,7 +21,7 @@ if (isset($_GET['token'])) {
             <style>
                 body {
                     font-family: Arial, sans-serif;
-                    background-color: #f4f4f4;
+                    background: url('../Images/forest.jpg') no-repeat center center/cover;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -55,14 +55,14 @@ if (isset($_GET['token'])) {
                 .form-container button {
                     width: 100%;
                     padding: 10px;
-                    background-color: #28a745;
+                    background-color: black;
                     color: #fff;
                     border: none;
                     border-radius: 4px;
                     cursor: pointer;
                 }
                 .form-container button:hover {
-                    background-color: #218838;
+                    background-color:grey;
                 }
                 .message {
                     margin-top: 15px;

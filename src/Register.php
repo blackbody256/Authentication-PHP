@@ -16,15 +16,16 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f8f9fa;
+            background: url('../Images/forest.jpg') no-repeat center center/cover;
         }
         .container {
             background: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            width: 500px;
             text-align: center;
+            height: 550px;
         }
         .container h2 {
             margin-bottom: 10px;
@@ -59,7 +60,7 @@
             margin-right: 5px;
         }
         .terms a {
-            color: #007bff;
+            color: #28a745;
             text-decoration: none;
         }
         .terms a:hover {
@@ -84,7 +85,7 @@
             margin-top: 10px;
         }
         .login-link a {
-            color: #007bff;
+            color: #28a745;
             text-decoration: none;
         }
         .message {
