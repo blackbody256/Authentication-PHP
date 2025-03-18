@@ -14,7 +14,7 @@ try {
     
     $con->set_charset("utf8mb4");
 
-    echo "Database connection successful!"; 
+    ; 
 
 } catch (mysqli_sql_exception $e) {
     die("Database Connection Failed: " . $e->getMessage());
