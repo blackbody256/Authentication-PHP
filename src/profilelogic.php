@@ -32,7 +32,7 @@ if (!empty($_FILES["profile_picture"]["name"])) {
     if (!empty($oldImage)) {
         $oldImagePath = "../Images/" . $oldImage;
         if (file_exists($oldImagePath)) {
-            unlink($oldImagePath); // Deleting the old image before uploading the new one
+            unlink($oldImagePath); // Delete old image
         }
     }
 }
