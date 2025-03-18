@@ -27,7 +27,7 @@ if (isset($_POST['reset_request'])) {
         $stmt->execute();
 
         // Send reset email using PHPMailer
-        $reset_link = "http://localhost:3000/reset.php?token=$token";
+        $reset_link = "http://localhost:3000/src/reset.php?token=$token";
 
         $mail = new PHPMailer(true);
         try {
@@ -104,14 +104,14 @@ if (isset($_POST['reset_request'])) {
             margin-top: 10px;
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            background-color: black;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
         .form-container button:hover {
-            background-color: #218838;
+            background-color: black;
         }
         .message {
             margin-top: 15px;
