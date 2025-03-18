@@ -1,3 +1,7 @@
+<?php
+setcookie("delete", "Account Deleted Successfully", time() - 3600, "/");
+
+?>
 <!DOCTYPE html>
 <html>
 <head>

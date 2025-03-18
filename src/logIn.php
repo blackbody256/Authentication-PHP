@@ -18,6 +18,8 @@ $error = ""; // Initialize error message
 $rememberedEmail = $_COOKIE['remember_email'] ?? "";
 $rememberChecked = isset($_COOKIE['remember_email']) ? "checked" : "";
 
+
+
 // If "Remember Me" token exists, retrieve the email from the database
 if (isset($_COOKIE['remember_token'])) {
     $token = $_COOKIE['remember_token'];
@@ -161,7 +163,17 @@ if (isset($_SESSION['error'])) {
         </div>
     </nav>
 
-    <div class="container">
+    <di class="container">
+        <?php
+            if (isset($_COOKIE["delete"])) {
+                $message = $_SESSION["account_deleted"];
+                echo "Account deleted successfully";
+                setcookie("delete", "Account Deleted Successfully", time() - 3600, "/");
+            
+
+            }
+
+        ?>
         <h1>LogIn</h1>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
             <?php if (!empty($error)): ?>

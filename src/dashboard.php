@@ -1,3 +1,15 @@
+<?php
+session_start();
+$message = "";
+if (isset($_SESSION["account_deleted"])) {
+    $message = $_SESSION["account_deleted"];
+    echo "Account Updated successfully";
+    unset($_SESSION["account_deleted"]); // Remove message after displaying
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

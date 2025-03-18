@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
     // Define upload directory
-    //$target_dir = "C:/xampp/htdocs/User Mgt System/Authentication-PHP/Images/"; // Absolute path
+    
     $target_dir = "../Images/";
     if (!file_exists($target_dir)) {
         die("ERROR: Target directory does not exist: " . $target_dir);
@@ -16,9 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_name = basename($_FILES["profile_picture"]["name"]);
     $target_file = $target_dir . $file_name;
 
-    // // Debugging
-    // echo "Uploading file to: " . $target_file . "<br>";
-    // echo "Temporary file path: " . $_FILES["profile_picture"]["tmp_name"] . "<br>";
+
 
     // Check file size (max 5MB)
     if ($_FILES["profile_picture"]["size"] > 5 * 1024 * 1024) {

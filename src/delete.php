@@ -32,7 +32,9 @@
     session_unset();
 
     session_destroy();
+    setcookie("delete", "Account Deleted Successfully", time() + 3600, "/");
     header("Location: logIn.php");
+
 
 
 ?>
