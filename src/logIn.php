@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../Config/Connect.php');
+require '../Config/Connect.php';
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -12,7 +12,6 @@ header("Expires: 0");
 $emailErr = $_SESSION['emailErr'] ?? '';
 $passwordErr = $_SESSION['passwordErr'] ?? '';
 unset($_SESSION['emailErr'], $_SESSION['passwordErr']);
-
 
 $error = ""; // Initialize error message
 
@@ -46,8 +45,6 @@ function sanitize($data) {
 
 $email = $password = "";
 $emailErr = $passwordErr = ""; 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $remember = isset($_POST['remember']) ? true : false; 
@@ -83,21 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($user && password_verify($password, $user['password'])) {
            
-           
-
              // Set session
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION["ID"] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+
 
             // Handle "Remember Me"
             if ($remember) {
                 $token = bin2hex(random_bytes(32));
                 $hashedToken = password_hash($token, PASSWORD_DEFAULT); // this is to avoid the attacker from stealing the token
+                
                 setcookie("remember_password", $password, time() + (86400 * 30), "/"); // Store password for 30 days
                 setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true); // 30 days
                 setcookie("remember_email", $email, time() + (86400 * 30), "/", "", false, true);  
                 
-
-
                 // Update remember_token in database
                 $stmt = $con->prepare("UPDATE users SET remember_token = ? WHERE id = ?");
                 $stmt->bind_param("si", $hashedToken, $user['id']);
@@ -115,23 +111,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   $stmt->execute();
             }
 
-            
 
             // Redirect to dashboard
             header("Location: dashboard.php");
             exit();
         } else {
-            
+
             if ($email !== $user['email']) {
                 $_SESSION['error'] = "Invalid email";
             }
             else{
                 $_SESSION['error'] = "Invalid password.";
             }
-            
+
             $_SESSION['emailErr'] = $emailErr;
             $_SESSION['passwordErr'] = $passwordErr;
-            header("Location: login.php");
+            header("Location: logIn.php");
             exit();
         }
     }
@@ -154,12 +149,8 @@ if (isset($_SESSION['error'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
     <link rel="stylesheet" href="logIn.css">
-    <title>Log In</title>
+    <title>LogIn</title>
 </head>
 <body>
 
@@ -193,7 +184,7 @@ if (isset($_SESSION['error'])) {
                 <label>
                     <input type="checkbox" name="remember" <?php echo isset($_COOKIE['remember_email']) ? 'checked' : ''; ?>> Remember Me
                 </label>
-                <a href="forgot_password.php">Forgot Password?</a>
+                <a href="#">Forgot Password?</a>
             </div>
 
             <button type="submit">Login</button>

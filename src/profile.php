@@ -1,8 +1,5 @@
 <?php
-session_start();
 include '../Config/Connect.php';
-$_SESSION["ID"] = 1;
-
 
 // Ensure the user is logged in
 if (!isset($_SESSION["ID"])) {

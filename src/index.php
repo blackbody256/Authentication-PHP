@@ -65,7 +65,7 @@
 <body>
     <div class="landing-container">
         <h1><b>WELCOME TO GROUP J USER MANAGEMENT SYSTEM</b></h1>
-        <a href="login.php" class="btn">Login</a>
+        <a href="logIn.php" class="btn">Login</a>
         <a href="Register.php" class="btn register">Register</a>
     </div>
 </body>

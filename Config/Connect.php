@@ -1,22 +1,17 @@
 <?php
 $server = "localhost";
-$username = "root";  
-$password = "";
+$username = "Andrew";  
+$password = "Database";
 $database = "user_management";
 
-try {
-    
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     
-    $con = new mysqli($server, $username, $password, $database);
-    
-    
-    $con->set_charset("utf8mb4");
+$con = new mysqli($server, $username, $password, $database);
 
-    ; 
-
-} catch (mysqli_sql_exception $e) {
-    die("Database Connection Failed: " . $e->getMessage());
+if (!$con){
+    die(mysqli_error($con));
 }
+    
+    
+    
 ?>
