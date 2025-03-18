@@ -1,38 +1,41 @@
 <?php
 session_start();
-
-// Retrieve stored errors and clear them from session
-$emailErr = $_SESSION['emailErr'] ?? '';
-$passwordErr = $_SESSION['passwordErr'] ?? '';
-unset($_SESSION['emailErr'], $_SESSION['passwordErr']);
+require './Config/Connect.php';
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header("Expires: 0");
 
-require '../Config/Connect.php';
+
+// Retrieve stored errors and clear them from session
+$emailErr = $_SESSION['emailErr'] ?? '';
+$passwordErr = $_SESSION['passwordErr'] ?? '';
+unset($_SESSION['emailErr'], $_SESSION['passwordErr']);
+
 
 $error = ""; // Initialize error message
 
-// If session is not set, check for "Remember Me" token
-if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
-    $token = $_COOKIE['remember_token'];
+$rememberedEmail = $_COOKIE['remember_email'] ?? "";
+$rememberChecked = isset($_COOKIE['remember_email']) ? "checked" : "";
 
-    // Check the database for the token
-    $stmt = $con->prepare("SELECT id FROM users WHERE remember_token = ?");
-    $stmt->bind_param("s", $token);
+// If "Remember Me" token exists, retrieve the email from the database
+if (isset($_COOKIE['remember_token'])) {
+    $token = $_COOKIE['remember_token'];
+    
+    // Fetch all users with a remember token
+    $stmt = $con->prepare("SELECT email, remember_token FROM users WHERE remember_token IS NOT NULL");
     $stmt->execute();
     $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
 
-    if ($user) {
-        $_SESSION['user_id'] = $user['id']; // Restore session
-        header("Location: dashboard.php"); // Redirect to dashboard if valid
-        exit();
+    while ($user = $result->fetch_assoc()) {
+        if (password_verify($token, $user['remember_token'])) {
+            $rememberedEmail = $user['email']; // Prefill email
+            $rememberChecked = "checked"; // Check the Remember Me box
+            break;
+        }
     }
 }
-
 
 function sanitize($data) {
     $data = trim($data);
@@ -89,16 +92,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($remember) {
                 $token = bin2hex(random_bytes(32));
                 $hashedToken = password_hash($token, PASSWORD_DEFAULT); // this is to avoid the attacker from stealing the token
+                setcookie("remember_password", $password, time() + (86400 * 30), "/"); // Store password for 30 days
                 setcookie("remember_token", $token, time() + (86400 * 30), "/", "", false, true); // 30 days
+                setcookie("remember_email", $email, time() + (86400 * 30), "/", "", false, true);  
+                
+
 
                 // Update remember_token in database
                 $stmt = $con->prepare("UPDATE users SET remember_token = ? WHERE id = ?");
                 $stmt->bind_param("si", $hashedToken, $user['id']);
                 $stmt->execute();
+            }else{
+                  // Clear cookies if "Remember Me" is unchecked
+                  setcookie("remember_token", "", time() - 3600, "/");
+                  setcookie("remember_password", "", time() - 3600, "/"); // Delete cookie
+                  setcookie("remember_email", "", time() - 3600, "/");
+                 
+
+                  // Remove token from database
+                  $stmt = $con->prepare("UPDATE users SET remember_token = NULL WHERE id = ?");
+                  $stmt->bind_param("i", $user['id']);
+                  $stmt->execute();
             }
 
-
-           
             
 
             // Redirect to dashboard
@@ -128,7 +144,8 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-// Prevent caching so logout works properly
+
+
 
 ?>
 
@@ -162,19 +179,19 @@ if (isset($_SESSION['error'])) {
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="input" >
+                <input type="email" id="email" name="email" class="input"  value="<?php echo $_COOKIE['remember_email'] ?? ''; ?>">
                 <p style="color:red;"><?php echo $emailErr; ?></p> <!-- Display email error -->
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="input">
+                <input type="password" id="password" name="password" class="input" value="<?php echo $_COOKIE['remember_password'] ?? ''; ?>">
                 <p style="color:red;"><?php echo $passwordErr; ?></p> <!-- Display password error -->
             </div>
 
             <div class="remember-forgot">
                 <label>
-                    <input type="checkbox" name="remember"> Remember Me
+                    <input type="checkbox" name="remember" <?php echo isset($_COOKIE['remember_email']) ? 'checked' : ''; ?>> Remember Me
                 </label>
                 <a href="forgot_password.php">Forgot Password?</a>
             </div>
