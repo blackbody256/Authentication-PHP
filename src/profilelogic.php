@@ -44,6 +44,13 @@ if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] == 
     $target_file = $target_dir . $file_name;
     $file_size = $_FILES["profile_picture"]["size"];
 
+    $imageFileType = strtolower(pathinfo($_FILES["profile_picture"]["name"], PATHINFO_EXTENSION));
+    // Check file format (To allow only certain image types)
+    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" ) {
+        echo "Sorry, only JPG, JPEG & PNG files are allowed.";
+        exit();
+    }
+
     //(max 5MB) as file size
     if ($file_size > 5 * 1024 * 1024) {
         echo "File is too large. Max 5MB allowed.";

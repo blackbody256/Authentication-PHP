@@ -1,10 +1,17 @@
 <?php
 include "../Config/Connect.php";
 
+function sanitize($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data); 
+    return $data;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $password = $_POST["password"];
 
     // Define upload directory
     
@@ -15,6 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $file_name = basename($_FILES["profile_picture"]["name"]);
     $target_file = $target_dir . $file_name;
+    $imageFileType = strtolower(pathinfo($_FILES["profile_picture"]["name"], PATHINFO_EXTENSION));
+    // Check file format (To allow only certain image types)
+    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" ) {
+        die("Sorry, only JPG, JPEG & PNG files are allowed.");
+
+    }
 
 
 
@@ -31,6 +44,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Move file to target directory
     if (!move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
         die("Failed to move uploaded file. Check folder permissions.");
+    }
+    //email
+    if (empty($_POST['email'])) {
+        die("Please enter an email");
+    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        die("Please enter a valid email");
+    } else {
+        $email = sanitize($_POST['email']);
+    }
+    //password
+    
+    if (empty($_POST['password'])) {
+        die("Please enter a password");
+    } elseif (strlen($_POST['password']) < 8) {
+        die("Enter a password with alteast 8 characters");
+    } else {
+        $sanitanize_password = sanitize($_POST['password']);
+        $password = password_hash($sanitanize_password, PASSWORD_DEFAULT);
     }
 
     // Insert user data into database
